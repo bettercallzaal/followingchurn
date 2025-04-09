@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { getSession } from "~/auth"
-import "~/app/globals.css";
+import "./globals.css";
 import { Providers } from "~/app/providers";
 
 export const metadata: Metadata = {
@@ -17,8 +17,12 @@ export default async function RootLayout({
   const session = await getSession()
 
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        {/* Prevent Grammarly from injecting its attributes */}
+        <meta name="grammarly-disable" content="true" />
+      </head>
+      <body suppressHydrationWarning>
         <Providers session={session}>{children}</Providers>
       </body>
     </html>

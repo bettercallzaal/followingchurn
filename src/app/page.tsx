@@ -4,22 +4,23 @@ import App from "./app";
 const appUrl = process.env.NEXT_PUBLIC_URL;
 
 // frame preview metadata
-const appName = process.env.NEXT_PUBLIC_FRAME_NAME;
+const appName = process.env.NEXT_PUBLIC_FRAME_NAME || "Inactive Followers Detector";
 const splashImageUrl = `${appUrl}/splash.png`;
 const iconUrl = `${appUrl}/icon.png`;
 
+// Use a simpler frame metadata structure to avoid hydration issues
 const framePreviewMetadata = {
   version: "next",
   imageUrl: `${appUrl}/opengraph-image`,
   button: {
-    title: process.env.NEXT_PUBLIC_FRAME_BUTTON_TEXT,
+    title: process.env.NEXT_PUBLIC_FRAME_BUTTON_TEXT || "Check Your Inactive Following",
     action: {
       type: "launch_frame",
       name: appName,
       url: appUrl,
       splashImageUrl,
       iconUrl,
-      splashBackgroundColor: "#f7f7f7",
+      splashBackgroundColor: "#4f46e5", // Indigo color for better branding
     },
   },
 };
