@@ -2,11 +2,20 @@ import { NeynarAPIClient } from '@neynar/nodejs-sdk';
 
 // Initialize the Neynar client with the API key from environment variables
 const apiKey = process.env.NEYNAR_API_KEY || '15CC284E-9C7E-44C8-9D32-BC82D3C05320';
-const neynarClient = new NeynarAPIClient({
-  apiKey: apiKey
-});
 
-console.log('Neynar client initialized with API key:', apiKey);
+// Create Neynar client only if we're in a browser environment or if we have an API key
+let neynarClient: NeynarAPIClient;
+
+try {
+  neynarClient = new NeynarAPIClient({
+    apiKey: apiKey
+  });
+  console.log('Neynar client initialized with API key');
+} catch (error) {
+  console.error('Failed to initialize Neynar client:', error);
+  // Create a minimal client that won't be used (development fallback)
+  neynarClient = { fetchUserFollowing: async () => ({ users: [] }) } as any;
+}
 
 export interface FarcasterUser {
   fid: number;

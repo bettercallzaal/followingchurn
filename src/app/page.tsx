@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import App from "./app";
 
-const appUrl = process.env.NEXT_PUBLIC_URL;
+const appUrl = process.env.NEXT_PUBLIC_URL || 'https://followertest-bettercallzaals-projects.vercel.app';
 
 // frame preview metadata
 const appName = process.env.NEXT_PUBLIC_FRAME_NAME || "Inactive Followers Detector";
@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: appName,
     openGraph: {
       title: appName,
-      description: process.env.NEXT_PUBLIC_FRAME_DESCRIPTION,
+      description: process.env.NEXT_PUBLIC_FRAME_DESCRIPTION || "Find and unfollow users who haven&apos;t posted in a while",
     },
     other: {
       "fc:frame": JSON.stringify(framePreviewMetadata),
