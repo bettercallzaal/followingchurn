@@ -114,7 +114,7 @@ export default function InactiveFollowers() {
       
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to unfollow user');
+        throw new Error(errorData.error || "Failed to unfollow user");
       }
       
       // Remove from list

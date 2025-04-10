@@ -20,7 +20,7 @@ export default function App(
       <div className="container mx-auto py-8 px-4">
         <h1 className="text-2xl font-bold mb-8 text-center">{safeTitle}</h1>
         <p className="text-center mb-8 text-gray-600">
-          Find and unfollow users who haven't posted in a while. 
+          Find and unfollow users who haven&apos;t posted in a while. 
           Filter by inactivity period and sort by oldest followers.
         </p>
         <InactiveFollowers />

@@ -53,7 +53,7 @@ export async function fetchFollowing(fid: number): Promise<FarcasterUser[]> {
       }
       
       // Map the response to our FarcasterUser interface
-      const mappedUsers = response.users.map((user: any) => ({
+      const mappedUsers = response.users.map((user: { fid: number; username?: string; displayName?: string; pfpUrl?: string }) => ({
         fid: user.fid,
         username: user.username || `user_${user.fid}`,
         displayName: user.displayName || `User ${user.fid}`,

@@ -40,7 +40,7 @@ export function useFarcasterUser(): FarcasterUser {
           // No user info in context, try to authenticate
           try {
             // Try to sign in with Farcaster
-            // @ts-ignore - SDK types might be outdated
+            // @ts-expect-error - SDK types might be outdated
             await sdk.actions.signIn();
             
             // Get updated context after sign in

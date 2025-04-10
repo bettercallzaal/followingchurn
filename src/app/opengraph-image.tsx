@@ -66,7 +66,7 @@ export default async function Image() {
           </h1>
         </div>
         <p style={{ fontSize: 32, textAlign: "center", maxWidth: "800px" }}>
-          Find and unfollow users who haven't posted in a while.
+          Find and unfollow users who haven&apos;t posted in a while.
           Filter by inactivity period and sort by oldest followers.
         </p>
       </div>
