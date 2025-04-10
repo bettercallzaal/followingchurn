@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inactive Followers Detector</title>
+    
+    <!-- Farcaster Frame metadata -->
+    <meta property="fc:frame" content="vNext">
+    <meta property="fc:frame:image" content="https://followingchurn123-o9vtsr5tq-bettercallzaals-projects.vercel.app/opengraph-image.png">
+    <meta property="fc:frame:button:1" content="Check Your Inactive Following">
+    <meta property="fc:frame:button:1:action" content="post_redirect">
+    <meta property="fc:frame:post_url" content="https://followingchurn123-o9vtsr5tq-bettercallzaals-projects.vercel.app/api/frame">
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Inactive Followers Detector</h1>
+        <p>Find and unfollow users who haven't posted in a while</p>
+        <p>This is a static HTML file that should work with Farcaster frames</p>
+    </div>
+    
+    <script>
+        // Log debugging information
+        console.log('Static frame loaded');
+        console.log('Document URL:', document.URL);
+        console.log('Document referrer:', document.referrer);
+        
+        // Check if we're in an iframe
+        const isInIframe = window !== window.parent;
+        console.log('Is in iframe:', isInIframe);
+    </script>
+</body>
+</html>
