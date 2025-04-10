@@ -2,8 +2,11 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
+  console.log('Middleware executing for path:', request.nextUrl.pathname);
+  
   // Clone the request headers
   const requestHeaders = new Headers(request.headers);
+  console.log('Request headers:', Object.fromEntries(requestHeaders.entries()));
   
   // Get response
   const response = NextResponse.next({
@@ -18,6 +21,10 @@ export function middleware(request: NextRequest) {
     'Content-Security-Policy',
     "frame-ancestors 'self' https://warpcast.com https://*.vercel.app https://*.farcaster.xyz *;"
   );
+  response.headers.delete('X-Frame-Options-Set-By-Next');
+
+  // Log the headers we're setting
+  console.log('Response headers set in middleware:', Object.fromEntries(response.headers.entries()));
 
   return response;
 }
