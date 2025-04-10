@@ -136,30 +136,30 @@ export async function fetchUserActivity(fid: number): Promise<Date | null> {
 
 /**
  * Unfollow a user - in a real implementation, this would use the Neynar API
- * @param currentUserFid The FID of the current user
+ * @param userFid The FID of the current user
  * @param targetFid The FID of the user to unfollow
  * @returns Success status
  */
-export async function unfollowUser(currentUserFid: number, targetFid: number): Promise<boolean> {
+export async function unfollowUser(userFid: number, targetFid: number): Promise<{ success: boolean; message?: string; error?: string }> {
   try {
-    console.log(`Attempting to unfollow user ${targetFid} from user ${currentUserFid}`);
+    console.log(`Attempting to unfollow user ${targetFid} from user ${userFid}`);
     
     // In development or without proper API access, simulate a successful unfollow
     if (process.env.NODE_ENV === 'development' || !process.env.NEYNAR_API_KEY) {
-      console.log(`[MOCK] User ${currentUserFid} unfollowed user ${targetFid}`);
-      return true;
+      console.log(`[MOCK] User ${userFid} unfollowed user ${targetFid}`);
+      return { success: true };
     }
     
     // In a real implementation with write access, you would use:
-    // const response = await neynarClient.unfollowUser(currentUserFid, targetFid);
-    // return response.success;
+    // const response = await neynarClient.unfollowUser(userFid, targetFid);
+    // return { success: response.success };
     
     // For now, we'll simulate a successful unfollow in all cases
-    console.log(`User ${currentUserFid} unfollowed user ${targetFid}`);
-    return true;
+    console.log(`User ${userFid} unfollowed user ${targetFid}`);
+    return { success: true };
   } catch (error) {
     console.error('Error unfollowing user:', error);
-    return false;
+    return { success: false, error: 'Failed to unfollow user' };
   }
 }
 

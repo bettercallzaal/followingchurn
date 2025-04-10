@@ -14,7 +14,7 @@ export interface FarcasterUser {
 }
 
 export function useFarcasterUser(): FarcasterUser {
-  const { context, isSDKLoaded } = useFrame();
+  const { isSDKLoaded } = useFrame();
   const [user, setUser] = useState<FarcasterUser>({
     isAuthenticated: false,
     isLoading: true
@@ -32,7 +32,7 @@ export function useFarcasterUser(): FarcasterUser {
             fid: sdkContext.user.fid,
             username: sdkContext.user.username,
             displayName: sdkContext.user.displayName,
-            pfp: sdkContext.user.pfpUrl || sdkContext.user.pfp,
+            pfp: sdkContext.user.pfpUrl as string,
             isAuthenticated: true,
             isLoading: false
           });
@@ -40,6 +40,7 @@ export function useFarcasterUser(): FarcasterUser {
           // No user info in context, try to authenticate
           try {
             // Try to sign in with Farcaster
+            // @ts-ignore - SDK types might be outdated
             await sdk.actions.signIn();
             
             // Get updated context after sign in
@@ -50,7 +51,7 @@ export function useFarcasterUser(): FarcasterUser {
                 fid: updatedContext.user.fid,
                 username: updatedContext.user.username,
                 displayName: updatedContext.user.displayName,
-                pfp: updatedContext.user.pfpUrl || updatedContext.user.pfp,
+                pfp: updatedContext.user.pfpUrl as string,
                 isAuthenticated: true,
                 isLoading: false
               });
@@ -79,7 +80,13 @@ export function useFarcasterUser(): FarcasterUser {
     };
 
     if (isSDKLoaded) {
-      getUserInfo();
+      getUserInfo().catch(err => {
+        console.error('Error in getUserInfo:', err);
+        setUser({
+          isAuthenticated: false,
+          isLoading: false
+        });
+      });
     }
   }, [isSDKLoaded]);
 

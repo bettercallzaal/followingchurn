@@ -1,3 +1,10 @@
+#!/bin/bash
+
+# Simple deployment script for Vercel
+echo "Starting deployment to Vercel..."
+
+# Create a vercel.json file with build settings
+cat > vercel.json << EOF
 {
   "version": 2,
   "buildCommand": "npm run build",
@@ -15,3 +22,9 @@
     "NEYNAR_CLIENT_ID": "b8ef3593-7d21-4e7e-8e37-17adfec955d8"
   }
 }
+EOF
+
+# Deploy to Vercel
+npx vercel --prod
+
+echo "Deployment complete!"

@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "./ui/Button";
 import { Label } from "./ui/label";
-import { Input } from "./ui/input";
 import { formatDistanceToNow } from "date-fns";
 import { useFarcasterUser } from "~/hooks/useFarcasterUser";
 
@@ -27,20 +26,6 @@ export default function InactiveFollowers() {
   const [sortBy, setSortBy] = useState("lastActive");
   const [unfollowingFid, setUnfollowingFid] = useState<number | null>(null);
 
-  // Fetch followers when authenticated via Farcaster
-  useEffect(() => {
-    if (user.isAuthenticated && user.fid) {
-      fetchFollowers();
-    }
-  }, [user.isAuthenticated, user.fid]);
-
-  // Filter and sort followers when filters change
-  useEffect(() => {
-    if (followers.length > 0) {
-      filterAndSortFollowers();
-    }
-  }, [followers, inactivityFilter, sortBy]);
-
   // Fetch followers from Farcaster API
   const fetchFollowers = useCallback(async () => {
     if (!user.fid) return;
@@ -54,13 +39,13 @@ export default function InactiveFollowers() {
       
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to fetch followers');
+        throw new Error(errorData.error || "Failed to fetch followers");
       }
       
       const data = await response.json();
       
       // Convert string dates to Date objects
-      const followersWithDates = data.followers.map((follower: any) => ({
+      const followersWithDates = data.followers.map((follower: { fid: number; username: string; displayName: string; pfp: string; lastActive: string; followedAt: string }) => ({
         ...follower,
         lastActive: new Date(follower.lastActive),
         followedAt: new Date(follower.followedAt),
@@ -93,6 +78,20 @@ export default function InactiveFollowers() {
     
     setFilteredFollowers(filtered);
   }, [followers, inactivityFilter, sortBy]);
+  
+  // Fetch followers when authenticated via Farcaster
+  useEffect(() => {
+    if (user.isAuthenticated && user.fid) {
+      fetchFollowers();
+    }
+  }, [user.isAuthenticated, user.fid, fetchFollowers]);
+
+  // Filter and sort followers when filters change
+  useEffect(() => {
+    if (followers.length > 0) {
+      filterAndSortFollowers();
+    }
+  }, [followers, inactivityFilter, sortBy, filterAndSortFollowers]);
 
   // Unfollow a user
   const unfollowUser = useCallback(async (fid: number) => {
@@ -230,8 +229,8 @@ export default function InactiveFollowers() {
                 </div>
               </div>
               <div className="mt-2 text-sm space-y-1">
-                <p>Last active: {typeof window !== 'undefined' ? `${formatDistanceToNow(follower.lastActive)} ago` : 'Loading...'}</p>
-                <p>Following since: {typeof window !== 'undefined' ? `${formatDistanceToNow(follower.followedAt)} ago` : 'Loading...'}</p>
+                <p>Last active: {typeof window !== "undefined" ? `${formatDistanceToNow(follower.lastActive)} ago` : "Loading..."}</p>
+                <p>Following since: {typeof window !== "undefined" ? `${formatDistanceToNow(follower.followedAt)} ago` : "Loading..."}</p>
               </div>
               <div className="mt-4">
                 <Button 
