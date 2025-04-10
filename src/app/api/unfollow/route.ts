@@ -22,9 +22,9 @@ export async function POST(request: NextRequest) {
     }
     
     // Unfollow the target user
-    const success = await unfollowUser(userFid, targetFid);
+    const result = await unfollowUser(userFid, targetFid);
     
-    if (success) {
+    if (result.success) {
       return NextResponse.json({ success: true });
     } else {
       return NextResponse.json(
