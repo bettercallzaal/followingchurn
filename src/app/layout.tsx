@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 
 import { getSession } from "~/auth"
 import "./globals.css";
@@ -32,7 +31,6 @@ export default async function RootLayout({
   const session = await getSession()
 
   // Set headers for embedding in Farcaster
-  const headersList = headers();
   
   return (
     <html lang="en" suppressHydrationWarning>
