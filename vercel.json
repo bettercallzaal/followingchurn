@@ -5,6 +5,15 @@
   "installCommand": "npm install",
   "framework": "nextjs",
   "outputDirectory": ".next",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Frame-Options", "value": "ALLOWALL" },
+        { "key": "Content-Security-Policy", "value": "frame-ancestors 'self' https://warpcast.com https://*.vercel.app https://*.farcaster.xyz *;" }
+      ]
+    }
+  ],
   "env": {
     "NEXT_PUBLIC_URL": "https://followertest-bettercallzaals-projects.vercel.app",
     "NEXTAUTH_URL": "https://followertest-bettercallzaals-projects.vercel.app",
