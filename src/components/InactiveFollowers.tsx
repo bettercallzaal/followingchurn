@@ -101,10 +101,10 @@ export default function InactiveFollowers() {
     
     try {
       // Call our API endpoint to unfollow the user with the current user's FID
-      const response = await fetch('/api/unfollow', {
-        method: 'POST',
+      const response = await fetch("/api/unfollow", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ 
           targetFid: fid,
@@ -141,7 +141,7 @@ export default function InactiveFollowers() {
       <div className="w-full max-w-3xl mx-auto text-center py-10">
         <h2 className="text-xl font-semibold mb-4">Welcome to Inactive Followers Detector</h2>
         <p className="text-gray-500 mb-4">This app works best within the Farcaster ecosystem.</p>
-        <p className="text-gray-500">Please make sure you're using this app within Farcaster.</p>
+        <p className="text-gray-500">Please make sure you&apos;re using this app within Farcaster.</p>
       </div>
     );
   }
